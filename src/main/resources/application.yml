@@ -1,0 +1,25 @@
+server:
+  port: 8080
+
+spring:
+  thymeleaf:
+    encoding: UTF-8
+  application:
+    name: CheckMate
+
+  datasource:
+    url: jdbc:mysql://34.60.53.71:3306/highfive
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+
+  jwt:
+    secret: k32h7cOaxVR9BZC6n4GFm2ZPX6aYQ9v3
+    refresh: k32h7cOaxVR9BZC6n4GFm2ZPX6aYQ9v3
