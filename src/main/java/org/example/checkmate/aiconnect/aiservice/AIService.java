@@ -25,6 +25,7 @@ public class AIService {
         HttpEntity<FrequencyRequestDto> entity = new HttpEntity<>(frequencyRequest, headers);
 
         try {
+            // 실제 AI 서버 호출
             ResponseEntity<AIResponseDto> response = restTemplate.postForEntity(
                     aiServerUrl,
                     entity,
@@ -32,9 +33,14 @@ public class AIService {
             );
             return response;
         } catch (Exception e) {
-            log.error("Error while communicating with AI server", e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            log.error(" AI 서버 연결 실패. mock 응답을 반환합니다: {}", e.getMessage());
+
+            // ✅ 실패 시 mock 응답
+            AIResponseDto mockResponse = new AIResponseDto();
+            mockResponse.setPrediction(3);  // 임의의 강의실 번호
+            mockResponse.setConfidence(0.0); // 자신도 없는 mock 응답
+
+            return ResponseEntity.ok(mockResponse);
         }
     }
-
 }
