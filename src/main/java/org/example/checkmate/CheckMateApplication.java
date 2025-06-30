@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class CheckMateApplication {
 
     public static void main(String[] args) {
-
         SpringApplication.run(CheckMateApplication.class, args);
     }
 
