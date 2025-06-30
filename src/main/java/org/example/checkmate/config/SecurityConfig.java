@@ -44,9 +44,6 @@ public class SecurityConfig {
                                 "/v3/api-docs",
                                 "/v3/api-docs.yaml"
                         ).permitAll()
-//                                .requestMatchers("/userregform","/userreg","/login","/refreshToken","/loginform","/","/posts/about").permitAll()
-//
-//                                .anyRequest().authenticated()
                         .anyRequest().permitAll())
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenizer), UsernamePasswordAuthenticationFilter.class)
                 .formLogin(Customizer.withDefaults())
