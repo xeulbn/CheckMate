@@ -35,7 +35,7 @@ public class AIService {
         } catch (Exception e) {
             log.error(" AI 서버 연결 실패. mock 응답을 반환합니다: {}", e.getMessage());
 
-            // ✅ 실패 시 mock 응답
+            //실패 시 mock 응답
             AIResponseDto mockResponse = new AIResponseDto();
             mockResponse.setPrediction(3);  // 임의의 강의실 번호
             mockResponse.setConfidence(0.0); // 자신도 없는 mock 응답
