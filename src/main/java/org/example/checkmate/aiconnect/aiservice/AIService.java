@@ -37,7 +37,7 @@ public class AIService {
 
             //실패 시 mock 응답
             AIResponseDto mockResponse = new AIResponseDto();
-            mockResponse.setPrediction(3);  // 임의의 강의실 번호
+            mockResponse.setPrediction(1);  // 임의의 강의실 번호
             mockResponse.setConfidence(0.0); // 자신도 없는 mock 응답
 
             return ResponseEntity.ok(mockResponse);
