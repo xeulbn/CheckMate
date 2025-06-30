@@ -40,6 +40,7 @@ public class AIService {
             mockResponse.setPrediction(1);  // 임의의 강의실 번호
             mockResponse.setConfidence(0.0); // 자신도 없는 mock 응답
 
+            //DB 체킹 (cloudsql 제대로 들어있는지 항시 체크)
             return ResponseEntity.ok(mockResponse);
         }
     }
