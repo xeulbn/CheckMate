@@ -2,14 +2,10 @@ package org.example.checkmate.aiconnect.aiservice;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.checkmate.dto.AIResponseDto;
-import org.example.checkmate.dto.FrequencyDto;
 import org.example.checkmate.dto.FrequencyRequestDto;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 @Slf4j
@@ -40,7 +36,6 @@ public class AIService {
             mockResponse.setPrediction(1);  // 임의의 강의실 번호
             mockResponse.setConfidence(0.0); // 자신도 없는 mock 응답
 
-            //DB 체킹 (cloudsql 제대로 들어있는지 항시 체크)
             return ResponseEntity.ok(mockResponse);
         }
     }
