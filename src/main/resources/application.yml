@@ -24,3 +24,13 @@ spring:
   jwt:
     secret: k32h7cOaxVR9BZC6n4GFm2ZPX6aYQ9v3
     refresh: k32h7cOaxVR9BZC6n4GFm2ZPX6aYQ9v3
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus, health, info
+  metrics:
+    tags:
+      application: ${spring.application.name}

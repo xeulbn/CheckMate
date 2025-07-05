@@ -45,13 +45,24 @@ public class AttendanceService {
                         attendanceRepository.save(attendance);
                         return;
                     }
+                }else if (schedule.getDayOfWeek()==today&&isLate(schedule.getStartTime(),currentTime)){
+                    Attendance attendance = new Attendance();
+                    attendance.setStudent(student);
+                    attendance.setLecture(lecture);
+                    attendance.setDate(now.toLocalDate());
+                    attendance.setStatus(AttendanceStatus.LATE);
+                    attendanceRepository.save(attendance);
+                    return;
                 }
             }
         }
     }
 
     private boolean isWithin(LocalTime classStart, LocalTime now){
-        return now.isAfter(classStart.minusMinutes(10)) && now.isBefore(classStart.plusMinutes(15));
+        return now.isAfter(classStart.minusMinutes(10)) && now.isBefore(classStart.plusMinutes(5));
+    }
+    private boolean isLate(LocalTime classStart, LocalTime now){
+        return now.isAfter(classStart.plusMinutes(5)) && now.isBefore(classStart.plusMinutes(15));
     }
 
     public List<Attendance> getAttendByUser(String username){

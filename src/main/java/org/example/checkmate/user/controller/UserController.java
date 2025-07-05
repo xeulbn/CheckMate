@@ -44,7 +44,6 @@ public class UserController {
 
     @PostMapping("/api/login")
     public ResponseEntity<UserLoginResponseDto> loginUser(@RequestParam String username, @RequestParam String password, HttpServletResponse response) throws IOException {
-        log.info("login시작");
 
         User user=userService.findByUserName(username);
 
@@ -55,14 +54,12 @@ public class UserController {
         String accessToken = jwtTokenizer.createAccessToken(user.getId(),user.getUsername(),user.getName(),roles);
         String refreshToken = jwtTokenizer.createRefreshToken(user.getId(),user.getUsername(),user.getName(),roles);
 
-        log.info("access token 뭐냐고? {}", accessToken);
 
         RefreshToken refreshTokenEntity = new RefreshToken();
         refreshTokenEntity.setValue(refreshToken);
         refreshTokenEntity.setUserId(user.getId());
         refreshTokenService.addRefreshToken(refreshTokenEntity);
 
-        log.info("refresh token 뭐냐고? {}", refreshToken);
 
         UserLoginResponseDto loginResponse = UserLoginResponseDto.builder()
                 .accessToken(accessToken)
