@@ -28,14 +28,15 @@ public class JwtTokenizer {
         this.refreshSecret = refreshSecret.getBytes(StandardCharsets.UTF_8);
     }
 
-    private String createToken(Long id, String email, String name, List<String> roles
+    private String createToken(Long id, String username, String name, List<String> roles
             , Long expire, byte[] secretKey){
 
-        Claims claims = Jwts.claims().setSubject(email);
+        Claims claims = Jwts.claims().setSubject(username);
 
         //필요한 정보들을 저장한다.
         claims.put("name",name);
         claims.put("userId",id);
+        claims.put("userName",username);
         claims.put ("roles",roles);
 
         return Jwts.builder()
@@ -47,12 +48,12 @@ public class JwtTokenizer {
 
     }
 
-    public String createAccessToken(Long id, String email, String name, List<String> roles){
-        return createToken(id,email,name,roles,ACCESS_TOKEN_EXPIRE_COUNT,accessSecret);
+    public String createAccessToken(Long id, String username, String name, List<String> roles){
+        return createToken(id,username,name,roles,ACCESS_TOKEN_EXPIRE_COUNT,accessSecret);
     }
 
-    public String createRefreshToken(Long id, String email, String name, List<String> roles){
-        return createToken(id,email,name,roles,REFRESH_TOKEN_EXPIRE_COUNT,refreshSecret);
+    public String createRefreshToken(Long id, String username, String name, List<String> roles){
+        return createToken(id,username,name,roles,REFRESH_TOKEN_EXPIRE_COUNT,refreshSecret);
     }
 
     public static Key getSigningKey(byte[] secretKey){

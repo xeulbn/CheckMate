@@ -54,11 +54,7 @@ public class UserController {
         String accessToken = jwtTokenizer.createAccessToken(user.getId(),user.getUsername(),user.getName(),roles);
         String refreshToken = jwtTokenizer.createRefreshToken(user.getId(),user.getUsername(),user.getName(),roles);
 
-
-        RefreshToken refreshTokenEntity = new RefreshToken();
-        refreshTokenEntity.setValue(refreshToken);
-        refreshTokenEntity.setUserId(user.getId());
-        refreshTokenService.addRefreshToken(refreshTokenEntity);
+        refreshTokenService.addOrUpdateRefreshToken(user, refreshToken);
 
 
         UserLoginResponseDto loginResponse = UserLoginResponseDto.builder()
@@ -101,7 +97,7 @@ public class UserController {
         Claims claims = jwtTokenizer.parseRefreshToken(refreshToken.getValue());
 
         Long userId = Long.valueOf((Integer)claims.get("userId"));
-        String username = claims.get("username").toString();
+        String username = claims.get("userName").toString();
         User user = userService.getUser(userId).orElseThrow(() -> new IllegalArgumentException("Member not found"));
 
 
@@ -119,9 +115,6 @@ public class UserController {
                 .build();
         return new ResponseEntity(loginResponse, HttpStatus.OK);
     }
-
-
-
 
 
 }
