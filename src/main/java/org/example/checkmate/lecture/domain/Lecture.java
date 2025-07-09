@@ -21,7 +21,7 @@ public class Lecture {
     private String lectureName;
     private String lectureRoom;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User professor;
 
     @OneToMany(mappedBy = "lectures", cascade = CascadeType.ALL)

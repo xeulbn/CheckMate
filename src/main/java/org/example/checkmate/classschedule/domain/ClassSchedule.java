@@ -24,6 +24,7 @@ public class ClassSchedule {
     private LocalTime endTime;
     private String lectureRoom;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "lecture_id")
     private Lecture lectures;
 }
